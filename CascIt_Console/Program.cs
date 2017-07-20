@@ -1,42 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.OleDb;
-using System.Diagnostics;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CascIt_Console
 {
-    class Program
+    #region Imports
+
+    using System;
+    using System.CodeDom;
+    using System.Text;
+    using System.Text.RegularExpressions;
+
+    #endregion
+    internal class Program
     {
-        public class BlizzardUrl
+        private static void Main(string[] args)
         {
-            public const string PTRBattleNetPatchUrl = @"http://public-test.patch.battle.net:1119/patch";
-            public const string BattleNetPatchUrl = @"http://us.patch.battle.net:1119/patch";
-            public const string HearthConfigUrl = @"http://dist.blizzard.com.edgesuite.net/hs-pod/beta/{0}/config_hsb_na_{1}.xml";
-            public const string HearthBaseCDN = @"http://dist.blizzard.com.edgesuite.net/hs-pod/beta/{0}/{1}.direct/";
-            public const string HearthCDNUrl = @"http://dist.blizzard.com.edgesuite.net/hs-pod/beta/{0}/{1}.direct/hsb-{2}-{3}.mfil";
-        }
+            Console.SetBufferSize(1024, short.MaxValue - 1);
 
-        public class BlizzardPayload
-        {
-            public const string AgentPayload = "<version program=\"Agnt\"><record program=\"Agnt\" component=\"cdn\" version=\"1\" /><record program=\"Agnt\" component=\"cfg\" version=\"1\" /><record program=\"Agnt\" component=\"Win\" version=\"1\" /><record program=\"Agnt\" component=\"blob\" version=\"1\" /></version>";
-            public const string BattleNetPayload = "<version program=\"Bna\"><record program=\"Agnt\" component=\"cdn\" version=\"1\" /><record program=\"Agnt\" component=\"cfg\" version=\"1\" /><record program=\"Bna\" component=\"Win\" version=\"1\" /><record program=\"Bna\" component=\"blob\" version=\"1\" /></version>";
-            public const string HearthPayload = "<version program=\"HSB\"><record program=\"Agnt\" component=\"cdn\" version=\"1\" /><record program=\"HSB\" component=\"enUS\" version=\"1\" /><record program=\"HSB\" component=\"blob\" version=\"1\" /></version>";
-            public const string HearthVersionPayload = "<version program=\"HSB\"><record program=\"Agnt\" component=\"cdn\" version=\"1\" /><record program=\"HSB\" component=\"enUS\" version=\"1\" /><record program=\"HSB\" component=\"blob\" version=\"{0}\" /></version>";
-        }
+            //IReadOnlyCollection<int> range = Enumerable.Range(48, 57)
+            //                                           .Union(Enumerable.Range(97, 122))
+            //                                           .Union(new[] { 45, 95 }).ToArray();
+            //IReadOnlyCollection<char> rangeChars = range.Select(s => (char)s).ToArray();
 
-        public class BlizzardPTRPayload
-        {
-            public const string AgentPayload = "<version program=\"AgtB\"><record program=\"Agnt\" component=\"cdn\" version=\"1\" /><record program=\"Agnt\" component=\"cfg\" version=\"1\" /><record program=\"AgtB\" component=\"Win\" version=\"1\" /><record program=\"AgtB\" component=\"blob\" version=\"1\" /></version>";
-        }
+            //int maxLength = 5;
 
-        static void Main(string[] args)
-        {
-            Console.SetBufferSize(Console.BufferWidth * 2, Console.BufferHeight * 20);
+            //List<string> permutations = new List<string>();
+
+            //for (int i = 1; i <= maxLength; i++)
+            //{
+            //    IEnumerable<IEnumerable<char>> test = StringGeneration.GetPermutations(rangeChars, i);
+
+            //    permutations.AddRange(test.Select(t => new string(t.ToArray())));
+            //}
+
+            //permutations = permutations.Distinct().ToList();
+
+            //Console.WriteLine($"{permutations.Count} total permutations");
+
             //string[] urls = { CASCEngine.test0, CASCEngine.test1, CASCEngine.test2, CASCEngine.test3, CASCEngine.test4, CASCEngine.test5, CASCEngine.test6, CASCEngine.test7 };
 
             //foreach(string url in urls)
@@ -53,6 +53,9 @@ namespace CascIt_Console
             //}
 
             CASCEngine.ProcessEverything();
+
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("APPLICATION HAS FINISHED! PRESS ANY KEY TO EXIT!");
             Console.ReadKey();
         }
     }

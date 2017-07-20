@@ -1,21 +1,34 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Dynamic;
-using System.Linq;
-using System.Text;
-using System.Web.Script.Serialization;
-
-namespace CascIt_Console
+﻿namespace CascIt_Console
 {
+	#region Imports
+
+	using System;
+	using System.Collections;
+	using System.Collections.Generic;
+	using System.Collections.ObjectModel;
+	using System.Dynamic;
+	using System.Linq;
+	using System.Text;
+	using System.Web.Script.Serialization;
+
+	#endregion
 	/// <summary>
-	/// This class converts a JSON object into a C# dynamic object.
+	///     This class converts a JSON object into a C# dynamic object.
 	/// </summary>
 	public sealed class DynamicJsonConverter : JavaScriptConverter
 	{
 		/// <summary>
-		/// 
+		///     Supported Types
+		/// </summary>
+		public override IEnumerable<Type> SupportedTypes
+		{
+			get
+			{
+				return new ReadOnlyCollection<Type>(new List<Type>(new[] {typeof (object)}));
+			}
+		}
+
+		/// <summary>
 		/// </summary>
 		/// <param name="dictionary"></param>
 		/// <param name="type"></param>
@@ -26,11 +39,10 @@ namespace CascIt_Console
 			if (dictionary == null)
 				throw new ArgumentNullException("dictionary");
 
-			return type == typeof(object) ? new DynamicJsonObject(dictionary) : null;
+			return type == typeof (object) ? new DynamicJsonObject(dictionary) : null;
 		}
 
 		/// <summary>
-		/// 
 		/// </summary>
 		/// <param name="obj"></param>
 		/// <param name="serializer"></param>
@@ -38,14 +50,6 @@ namespace CascIt_Console
 		public override IDictionary<string, object> Serialize(object obj, JavaScriptSerializer serializer)
 		{
 			throw new NotImplementedException();
-		}
-
-		/// <summary>
-		/// Supported Types
-		/// </summary>
-		public override IEnumerable<Type> SupportedTypes
-		{
-			get { return new ReadOnlyCollection<Type>(new List<Type>(new[] { typeof(object) })); }
 		}
 
 		private sealed class DynamicJsonObject : DynamicObject
@@ -61,45 +65,44 @@ namespace CascIt_Console
 
 			public override string ToString()
 			{
-				var sb = new StringBuilder("{");
+				StringBuilder sb = new StringBuilder("{");
 				ToString(sb);
 				return sb.ToString();
 			}
 
 			private void ToString(StringBuilder sb)
 			{
-				var firstInDictionary = true;
-				foreach (var pair in _dictionary)
+				bool firstInDictionary = true;
+				foreach (KeyValuePair<string, object> pair in _dictionary)
 				{
 					if (!firstInDictionary)
 						sb.Append(",");
 					firstInDictionary = false;
-					var value = pair.Value;
-					var name = pair.Key;
+					object value = pair.Value;
+					string name = pair.Key;
 					if (value is string)
 					{
 						sb.AppendFormat("{0}:\"{1}\"", name, value);
 					}
 					else if (value is IDictionary<string, object>)
 					{
-						new DynamicJsonObject((IDictionary<string, object>)value).ToString(sb);
+						new DynamicJsonObject((IDictionary<string, object>) value).ToString(sb);
 					}
 					else if (value is ArrayList)
 					{
 						sb.Append(name + ":[");
-						var firstInArray = true;
-						foreach (var arrayValue in (ArrayList)value)
+						bool firstInArray = true;
+						foreach (object arrayValue in (ArrayList) value)
 						{
 							if (!firstInArray)
 								sb.Append(",");
 							firstInArray = false;
 							if (arrayValue is IDictionary<string, object>)
-								new DynamicJsonObject((IDictionary<string, object>)arrayValue).ToString(sb);
+								new DynamicJsonObject((IDictionary<string, object>) arrayValue).ToString(sb);
 							else if (arrayValue is string)
 								sb.AppendFormat("\"{0}\"", arrayValue);
 							else
 								sb.AppendFormat("{0}", arrayValue);
-
 						}
 						sb.Append("]");
 					}
@@ -120,15 +123,16 @@ namespace CascIt_Console
 					return true;
 				}
 
-				var dictionary = result as IDictionary<string, object>;
+				IDictionary<string, object> dictionary = result as IDictionary<string, object>;
 				if (dictionary != null)
 				{
 					result = new DynamicJsonObject(dictionary);
 					return true;
 				}
 
-				var arrayList = result as ArrayList;
-				if (arrayList != null && arrayList.Count > 0)
+				ArrayList arrayList = result as ArrayList;
+				if (arrayList != null
+					&& arrayList.Count > 0)
 				{
 					if (arrayList[0] is IDictionary<string, object>)
 						result = new List<object>(arrayList.Cast<IDictionary<string, object>>().Select(x => new DynamicJsonObject(x)));

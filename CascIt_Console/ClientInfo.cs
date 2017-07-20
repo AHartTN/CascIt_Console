@@ -1,19 +1,20 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-
-namespace CascIt_Console
+﻿namespace CascIt_Console
 {
+	#region Imports
+
 	using System;
+	using System.Linq;
+	using System.Net;
 	using System.Web;
 
+	#endregion
 	public class ClientInfo
 	{
 		private readonly HttpRequestBase _request;
 
 		public ClientInfo(HttpRequestBase request)
 		{
-			if(request == null)
+			if (request == null)
 				throw new ArgumentNullException("request");
 
 			_request = request;
@@ -21,192 +22,306 @@ namespace CascIt_Console
 
 		public string AnonymousId
 		{
-			get { return _request.AnonymousID; }
+			get
+			{
+				return _request.AnonymousID;
+			}
 		}
 
 		public string AppRelativeCurrentExecutionFilePath
 		{
-			get { return _request.AppRelativeCurrentExecutionFilePath; }
+			get
+			{
+				return _request.AppRelativeCurrentExecutionFilePath;
+			}
 		}
 
 		public string ApplicationPath
 		{
-			get { return _request.ApplicationPath; }
+			get
+			{
+				return _request.ApplicationPath;
+			}
 		}
 
 		public int ContentLength
 		{
-			get { return _request.ContentLength; }
+			get
+			{
+				return _request.ContentLength;
+			}
 		}
 
 		public string ContentType
 		{
-			get { return _request.ContentType; }
+			get
+			{
+				return _request.ContentType;
+			}
 		}
 
 		public string CurrentExecutionFilePath
 		{
-			get { return _request.CurrentExecutionFilePath; }
+			get
+			{
+				return _request.CurrentExecutionFilePath;
+			}
 		}
 
 		public string CurrentExecutionFilePathExtension
 		{
-			get { return _request.CurrentExecutionFilePathExtension; }
+			get
+			{
+				return _request.CurrentExecutionFilePathExtension;
+			}
 		}
 
 		public string FilePath
 		{
-			get { return _request.FilePath; }
+			get
+			{
+				return _request.FilePath;
+			}
 		}
 
 		public string HttpMethod
 		{
-			get { return _request.HttpMethod; }
+			get
+			{
+				return _request.HttpMethod;
+			}
 		}
 
 		public bool IsAuthenticated
 		{
-			get { return _request.IsAuthenticated; }
+			get
+			{
+				return _request.IsAuthenticated;
+			}
 		}
 
 		public bool IsLocal
 		{
-			get { return _request.IsLocal; }
+			get
+			{
+				return _request.IsLocal;
+			}
 		}
 
 		public bool IsSecureConnection
 		{
-			get { return _request.IsSecureConnection; }
+			get
+			{
+				return _request.IsSecureConnection;
+			}
 		}
 
 		public string Path
 		{
-			get { return _request.Path; }
+			get
+			{
+				return _request.Path;
+			}
 		}
 
 		public string PathInfo
 		{
-			get { return _request.PathInfo; }
+			get
+			{
+				return _request.PathInfo;
+			}
 		}
 
 		public string PhysicalApplicationPath
 		{
-			get { return _request.PhysicalApplicationPath; }
+			get
+			{
+				return _request.PhysicalApplicationPath;
+			}
 		}
 
 		public string PhysicalPath
 		{
-			get { return _request.PhysicalPath; }
+			get
+			{
+				return _request.PhysicalPath;
+			}
 		}
 
 		public string RawUrl
 		{
-			get { return _request.RawUrl; }
+			get
+			{
+				return _request.RawUrl;
+			}
 		}
 
 		public string ReadEntityBodyMode
 		{
-			get { return _request.ReadEntityBodyMode.ToString(); }
+			get
+			{
+				return _request.ReadEntityBodyMode.ToString();
+			}
 		}
 
 		public string RequestType
 		{
-			get { return _request.RequestType; }
+			get
+			{
+				return _request.RequestType;
+			}
 		}
 
 		public int TotalBytes
 		{
-			get { return _request.TotalBytes; }
+			get
+			{
+				return _request.TotalBytes;
+			}
 		}
 
 		public string UserAgent
 		{
-			get { return _request.UserAgent; }
+			get
+			{
+				return _request.UserAgent;
+			}
 		}
 
 		public string UserHostAddress
 		{
-			get { return _request.UserHostAddress; }
+			get
+			{
+				return _request.UserHostAddress;
+			}
 		}
 
 		public string UserHostName
 		{
-			get { return _request.UserHostName; }
+			get
+			{
+				return _request.UserHostName;
+			}
 		}
 
 		public string Browser
 		{
-			get { return _request.Browser.Browser; }
+			get
+			{
+				return _request.Browser.Browser;
+			}
 		}
 
 		public bool IsCrawer
 		{
-			get { return _request.Browser.Crawler; }
+			get
+			{
+				return _request.Browser.Crawler;
+			}
 		}
 
 		public string BrowserId
 		{
-			get { return _request.Browser.Id; }
+			get
+			{
+				return _request.Browser.Id;
+			}
 		}
 
 		public string BrowserInputType
 		{
-			get { return _request.Browser.InputType; }
+			get
+			{
+				return _request.Browser.InputType;
+			}
 		}
 
 		public bool IsMobileDevice
 		{
-			get { return _request.Browser.IsMobileDevice; }
+			get
+			{
+				return _request.Browser.IsMobileDevice;
+			}
 		}
 
 		public int BrowserMajorVersion
 		{
-			get { return _request.Browser.MajorVersion; }
+			get
+			{
+				return _request.Browser.MajorVersion;
+			}
 		}
 
 		public double BrowserMinorVersion
 		{
-			get { return _request.Browser.MinorVersion; }
+			get
+			{
+				return _request.Browser.MinorVersion;
+			}
 		}
 
 		public string MobileDeviceManufacturer
 		{
-			get { return _request.Browser.MobileDeviceManufacturer; }
+			get
+			{
+				return _request.Browser.MobileDeviceManufacturer;
+			}
 		}
 
 		public string MobileDeviceModel
 		{
-			get { return _request.Browser.MobileDeviceModel; }
+			get
+			{
+				return _request.Browser.MobileDeviceModel;
+			}
 		}
 
 		public int NumberOfSoftKeys
 		{
-			get { return _request.Browser.NumberOfSoftkeys; }
+			get
+			{
+				return _request.Browser.NumberOfSoftkeys;
+			}
 		}
 
 		public string BrowserPlatform
 		{
-			get { return _request.Browser.Platform; }
+			get
+			{
+				return _request.Browser.Platform;
+			}
 		}
 
 		public string BrowserType
 		{
-			get { return _request.Browser.Type; }
+			get
+			{
+				return _request.Browser.Type;
+			}
 		}
 
 		public string BrowserVersion
 		{
-			get { return _request.Browser.Version; }
+			get
+			{
+				return _request.Browser.Version;
+			}
 		}
 
 		public bool IsWin16
 		{
-			get { return _request.Browser.Win16; }
+			get
+			{
+				return _request.Browser.Win16;
+			}
 		}
 
 		public bool IsWin32
 		{
-			get { return _request.Browser.Win32; }
+			get
+			{
+				return _request.Browser.Win32;
+			}
 		}
 
 		public string AuthenticationType
@@ -221,7 +336,7 @@ namespace CascIt_Console
 		{
 			get
 			{
-				return _request.LogonUserIdentity != null ? (bool?)_request.LogonUserIdentity.IsAnonymous : null;
+				return _request.LogonUserIdentity != null ? (bool?) _request.LogonUserIdentity.IsAnonymous : null;
 			}
 		}
 
@@ -229,7 +344,7 @@ namespace CascIt_Console
 		{
 			get
 			{
-				return _request.LogonUserIdentity != null ? (bool?)_request.LogonUserIdentity.IsAuthenticated : null;
+				return _request.LogonUserIdentity != null ? (bool?) _request.LogonUserIdentity.IsAuthenticated : null;
 			}
 		}
 
@@ -237,7 +352,7 @@ namespace CascIt_Console
 		{
 			get
 			{
-				return _request.LogonUserIdentity != null ? (bool?)_request.LogonUserIdentity.IsGuest : null;
+				return _request.LogonUserIdentity != null ? (bool?) _request.LogonUserIdentity.IsGuest : null;
 			}
 		}
 
@@ -245,7 +360,7 @@ namespace CascIt_Console
 		{
 			get
 			{
-				return _request.LogonUserIdentity != null ? (bool?)_request.LogonUserIdentity.IsSystem : null;
+				return _request.LogonUserIdentity != null ? (bool?) _request.LogonUserIdentity.IsSystem : null;
 			}
 		}
 
